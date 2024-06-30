@@ -1,0 +1,65 @@
+<h1>Post#new</h1>
+
+  <div class="container">
+   <div class="row">
+      <div class="col">
+        <%= link_to post_new_path(current_user.id) do %>postnew
+        <% end %>
+      </div>
+      <div class="col">
+        <%= link_to post_index_path(current_user.id) do %>postindex
+        <% end %>
+       </div>
+       <div class="col"><%= link_to post_path(current_user.id) do %>postshow
+        <% end %>
+       </div>
+  </div>
+    <div class="row">
+      <div class="col">
+        <%= link_to comments_index_path(current_user.id) do %>commentsindex
+        <% end %>
+      </div>
+      <div class="col">
+        <%= link_to comments_show_path(current_user.id) do %>commentsshow
+        <% end %>
+      </div>
+      <div class="col">
+        <%= link_to favorites_index_path(current_user.id) do %>favoritesindex
+        <% end %>
+      </div>
+      <div class="col">
+        <%= link_to favorites_show_path(current_user.id) do %>favoritesshow
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+
+<div class="row justify-content-center">
+<%= form_with model: @post, url: posts_path, method: :post do |f| %>
+  <div>
+    <%= f.label :title, "タイトル" %><br>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :body, "本文" %><br>
+    <%= f.text_area :body %>
+  </div>
+
+  <div>
+    <%= f.label :images, "画像" %><br>
+    <%= f.file_field :image, accept: "image/*" %>
+  </div>
+
+  <div>
+    <%= f.submit "投稿" %>
+  </div>
+ <% end %>
+</div>
+
+<div class="form-group form-group_tags">
+  <%#= f.label :tag_list, "Tag", class: "form-label" %>
+  <%#= f.text_field :tag_list, value: @post.tag_list.join(","), class: "form-control", data: { role: "tagsinput" } %>
+</div>
+

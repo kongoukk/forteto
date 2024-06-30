@@ -1,0 +1,54 @@
+<h1>Homes#top</h1>
+
+
+
+   <% if current_user %>
+
+    <td>
+      <%= link_to destroy_user_session_path ,method: :delete do %>
+      logout
+      <% end %>
+    </td><br>
+
+    <td>
+      <%= link_to post_new_path(current_user.id) do %>
+      postnew
+      <% end %>
+    </td><br>
+
+    <td>
+      <%= link_to post_index_path(current_user.id) do %>
+      postindex
+      <% end %>
+    </td><br>
+
+    <td>
+      <%= link_to post_path(current_user.id) do %>
+      postshow
+      <% end %>
+    </td><br>
+
+    <td>
+      <%= link_to comments_index_path(current_user.id) do %>
+      commentsindex
+      <% end %>
+    </td><br>
+
+    <td>
+      <%= link_to comments_show_path(current_user.id) do %>
+      commentsshow
+      <% end %>
+    </td><br>
+
+    <td>
+      <%= link_to favorites_index_path(current_user.id) do %>
+      favoritesindex
+      <% end %>
+    </td><br>
+
+    <td>
+      <%= link_to favorites_show_path(current_user.id) do %>
+      favoritesshow
+      <% end %>
+    </td><br>
+    <% end %>
