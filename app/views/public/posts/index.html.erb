@@ -1,0 +1,94 @@
+<h1>Post#index</h1>
+
+<div class="container">
+  <div class="row">
+  </div>
+</div>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <h2>見出し</h2>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 order-md-2">
+      <h2>タグ一覧</h2>
+      <div class="card" %>
+        <div class="card-body">
+          <% @tags.each do |tag| %>
+            <%= link_to tag.name, posts_path(tag_id: tag.id), class: "badge badge-secondary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <table class="table col-md-8 order-md-1">
+      <% @posts.each do |post| %>
+        <tr>
+          <td><%=  link_to post.title, post_path(post.id) %></td>
+          <td><%= post.body %></td>
+          <% if post.image.attached? %>
+            <td><%= image_tag post.image, size: "150x150" %></td>
+          <% else %>
+            <td><img src="http://placehold.jp/150x150"></td>
+            <td colspan="3"></td>
+            <td class="btn btn-sm btn-danger ">
+              <%= link_to "Destroy", destroy_post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-danger" %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+     <!--タグ一覧表示-->
+
+     <!--<div>-->
+      <!--<h2>記事一覧</h2>-->
+      <%# @posts.each do |post| %>
+      <%#= post.title %><br>
+      <%# end %>
+     <!--</div>-->
+
+      <%# if user_signed_in? %>
+    <%#= form_with url: search_path, method: :get, local: true do |f| %>
+    <%#= f.text_field :content %>
+    <%#= f.select :model, options_for_select({"User" => "user", "Book" => "book"}) %>
+    <%#= f.select :method, options_for_select({"完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partial"}) %>
+    <%#= f.submit "検索" %>
+     <%# end %>
+     <%# end %>
+
+
+
+        <!-- <%# @comments.each do |comment| %>-->
+        <!--<tr>-->
+        <!-- <td>-->
+        <!--   <%#= link_to user_path(comment.user) do %>-->
+        <!--   <%#= image_tag comment.user.get_profile_image, size: "50x50" %><br>-->
+        <!--   <%#= comment.user.name %>-->
+        <!--    <%# end %>-->
+        <!-- </td>-->
+        <!--  <td><%#= comment.comment %></td>-->
+        <!--   <td>-->
+        <!--    <%# if comment.user == current_user %>-->
+        <!--    <%#= link_to "Destroy", [comment.post, comment], method: :delete, class: "btn btn-sm btn-danger float-end" %>-->
+        <!--     <%# end %>-->
+        <!--   </td>-->
+        <!--</tr>-->
+        <!--  <%# end %>-->
+        <!--<td>コメント数： <#%= post.comments.count %></td>-->
+        <!-- </tr>-->
+        <!-- -->
+
+
+
+

@@ -1,0 +1,72 @@
+<h1>Post#show</h1>
+
+  <div class="container">
+  </div>
+
+
+   <div class="container">
+    <div class="row justify-content-center">
+     <h2>見出し</h2>
+    </div>
+   </div>
+   <div class="row justify-content-center">
+   <table class="table col-8">
+      <thead>
+          <tr>
+             <th>タイトル</th>
+             <th>内容</th>
+             <th>画像</th>
+             <th></th>
+          </tr>
+      </thead>
+
+
+
+      <tbody>
+       <tr>
+         <td><%= @post.title %></td>
+         <td><%= @post.body %></td>
+         <% if @post.image.attached? %>
+          <td><%= image_tag @post.image, size: "150x150" %></td>
+         <%else%>
+          <td><img src="http://placehold.jp/150x150"></td>
+          <td colspan="3"></td>
+          <td class="btn btn-sm btn-danger ">
+          <%= link_to "Destroy", destroy_post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-danger" %>
+          <!--いいねボタン表示-->
+          <td><%= render "public/favorites/btn", post: @post %></td>
+         <%end%>
+       </tr>
+
+      </tbody>
+   </table>
+
+   <%= form_with model: [@post, Comment.new] do |f| %>
+  　<%= f.text_area :body, rows:'5', placeholder: "コメントをここに", class: "w-100" %>
+    <%= f.submit "送信" %>
+    <% end %>
+   </div>
+<table>
+    <!--コメント表示-->
+  <tbody>
+    <% @post.comments.each do |comment| %>
+    <tr>
+      <td>
+        <%= link_to user_path(comment.user) do %>
+          <%#= image_tag comment.user.get_profile_image, size: "50x50" %><br>
+          <%= comment.user.name %>
+        <% end %>
+      </td>
+      <td><%= comment.body %></td>
+      <td>
+        <% if comment.user == current_user %>
+          <%= link_to "Destroy", [comment.post, comment], method: :delete, class: "btn btn-sm btn-danger float-end" %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+

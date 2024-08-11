@@ -1,0 +1,38 @@
+<h1>Post#new</h1>
+
+  <div class="container">
+
+  </div>
+
+
+<div class="row justify-content-center">
+<%= form_with model: @post, url: posts_path, method: :post do |f| %>
+  <div>
+    <%= f.label :title, "タイトル" %><br>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :body, "本文" %><br>
+    <%= f.text_area :body %>
+  </div>
+
+  <div>
+    <%= f.label :images, "画像" %><br>
+    <%= f.file_field :image, accept: "image/*" %>
+  </div>
+  <div>
+    <%= f.text_field :tag_ids, class: "form-control", id:'tag_ids',\
+    placeholder: "タグをつける。複数つけるには','で区切ってください。" %>
+  </div>
+  <div>
+    <%= f.submit "投稿" %>
+  </div>
+
+ <% end %>
+</div>
+
+ <!--タグ作成箇所-->
+
+
+
