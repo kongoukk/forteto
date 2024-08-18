@@ -1,11 +1,11 @@
 class Post < ApplicationRecord
 
   has_many   :comments, dependent: :destroy
-  belongs_to :user, dependent: :destroy
+  belongs_to :user
   has_one_attached :image
   has_many :favorites, dependent: :destroy
-  has_many :post_relationships, dependent: :destroy
-  has_many :tags, through: :post_relationships
+   has_many :post_relationships, dependent: :destroy
+   has_many :tags, through: :post_relationships
 
 
 # 画像取得

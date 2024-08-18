@@ -37,10 +37,10 @@ scope module: :public do
       end
     end
      get '/posts/:id', to: 'posts#show', as: 'show_post'
+     get "/search", to: "searches#search"
   end
 
-
-  get "/search", to: "searches#search"
+  #get "/search", to: "searches#search"
 
   resources :users, only: [:index, :show, :edit, :update]
   resources :posts do
@@ -48,8 +48,6 @@ scope module: :public do
   end
 
   delete 'posts/:id', to: 'posts#destroy', as: 'destroy_post'
-
-
 
 end
 

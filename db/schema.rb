@@ -91,8 +91,6 @@ ActiveRecord::Schema.define(version: 2024_07_22_120301) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id", null: false
-    t.integer "post_id"
-    t.index ["post_id"], name: "index_posts_on_post_id"
   end
 
   create_table "tags", force: :cascade do |t|

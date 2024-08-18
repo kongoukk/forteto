@@ -1,9 +1,19 @@
-<h1>全ユーザー一覧</h1>
-<ul>
-  <% @users.each do |user| %>
-    <li>
-      <%= user.name %> - <%= user.email %>
-      <%= link_to '削除', admin_user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' } %>
-    </li>
-  <% end %>
-</ul>
+
+
+<div class="container">
+ <h1>adminユーザー一覧</h1>
+  <table class="table table-hover table-inverse">
+   <tbody>
+    <% @users.each do |user| %>
+     <tr>
+     <td>
+       <%= user.name %> - <%= user.email %>
+       <%= link_to '削除', admin_user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+     </td>
+      <td colspan="3"></td>
+     </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+

@@ -24,17 +24,18 @@
     <table class="table col-md-8 order-md-1">
       <% @posts.each do |post| %>
         <tr>
+          <td><%= image_tag 'no_image', size: "100x100" %></td>
           <td><%=  link_to post.title, post_path(post.id) %></td>
           <td><%= post.body %></td>
           <% if post.image.attached? %>
             <td><%= image_tag post.image, size: "150x150" %></td>
           <% else %>
             <td><img src="http://placehold.jp/150x150"></td>
-            <td colspan="3"></td>
-            <td class="btn btn-sm btn-danger ">
-              <%= link_to "Destroy", destroy_post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-danger" %>
-            </td>
           <% end %>
+          <td colspan="3"></td>
+          <td class="btn btn-sm btn-danger ">
+            <%= link_to "Destroy", destroy_post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-danger" %>
+          </td>
         </tr>
       <% end %>
     </table>

@@ -39,6 +39,10 @@ class Public::PostsController < ApplicationController
      end
   end
 
+  def current_user_can_delete?(post)
+    post.user_id == current_user.id
+  end
+
 
 
   def tags
