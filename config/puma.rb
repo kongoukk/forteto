@@ -14,12 +14,12 @@ threads min_threads_count, max_threads_count
 worker_timeout 3600 if ENV.fetch("RAILS_ENV", "development") == "development"
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
-#
 port ENV.fetch("PORT") { 3000 }
+#
 
 # Specifies the `environment` that Puma will run in.
-#
 environment ENV.fetch("RAILS_ENV") { "development" }
+#
 
 # Specifies the `pidfile` that Puma will use.
 pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
@@ -42,17 +42,26 @@ pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
 
-bind "unix://#{Rails.root}/tmp/sockets/puma.sock"
-rails_root = Dir.pwd
-# 本番環境のみデーモン起動
-if Rails.env.production?
-  pidfile File.join(rails_root, 'tmp', 'pids', 'puma.pid')
-  state_path File.join(rails_root, 'tmp', 'pids', 'puma.state')
-  stdout_redirect(
-    File.join(rails_root, 'log', 'puma.log'),
-    File.join(rails_root, 'log', 'puma-error.log'),
-    true
-  )
-  # デーモン
-  daemonize
+# Production向けの設定
+# Rails.root を使わず、puma.rb からの相対パスで取得
+app_root = File.expand_path("../..", __dir__)
+bind "unix://#{app_root}/tmp/sockets/puma.sock"
+
+if ENV['RAILS_ENV'] == 'production'
+  app_root = File.expand_path("../..", __FILE__)
+
+  bind "unix://#{app_root}/tmp/sockets/puma.sock"
+  stdout_redirect "#{app_root}/log/puma.stdout.log", "#{app_root}/log/puma.stderr.log", true
+
+  state_path "#{app_root}/tmp/pids/puma.state"
+  pidfile "#{app_root}/tmp/pids/puma.pid"
+  daemonize true
 end
+
+#if ENV["RAILS_ENV"] == "production"
+  #stdout_redirect "#{app_root}/log/puma.stdout.log", "#{app_root}/log/puma.stderr.log", true
+  #state_path "#{app_root}/tmp/pids/puma.state"
+  #pidfile "#{app_root}/tmp/pids/puma.pid"
+  #daemonize true
+#end
+

@@ -24,7 +24,7 @@
     <table class="table col-md-8 order-md-1">
       <% @posts.each do |post| %>
         <tr>
-          <td><%= image_tag 'no_image', size: "100x100" %></td>
+          <td><%= image_tag 'no_image.jpg', size: "100x100", alt: "No Image" %></td>
           <td><%=  link_to post.title, post_path(post.id) %></td>
           <td><%= post.body %></td>
           <% if post.image.attached? %>
